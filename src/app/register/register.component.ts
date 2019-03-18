@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControlName, FormBuilder ,Validators, FormGroup} from '@angular/forms';
 import { MortgageService } from '../mortgage.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,7 @@ import { MortgageService } from '../mortgage.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fb:FormBuilder, private ser:MortgageService) {
+  constructor(private fb:FormBuilder, private ser:MortgageService, private router:Router) {
     this.buildRegisterForm();
    }
 
@@ -35,6 +37,7 @@ export class RegisterComponent implements OnInit {
       this.userMeassage = data
       if(data.email === obj.email){
         alert(`sucessufuly registerd`);
+        this.router.navigate(['/login']);
       }else{
         alert(`Error in while register`);
       }
