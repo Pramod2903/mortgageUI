@@ -1,18 +1,20 @@
 <div class="container">
   <div class="col-sm-8 col-sm-offset-2">
 
-    <form [formGroup]="register" class="form-horizontal" role="form">
+    <form [formGroup]="register" (submit)="onSubmit()" class="form-horizontal" role="form">
       <div class="form-group">
         <legend class="text-center">Register</legend>
       </div>
 
       <!-- username -->
       <div class="form-group">
-        <label for="inputEnterUsername" class="col-sm-3 control-label">Enter Username :</label>
+        <label class="col-sm-3 control-label">Enter Username :</label>
         <div class="col-sm-8">
-          <input type="text" FormControlName="userName" name="EnterUsername" class="form-control">
+          <input type="text" formControlName="name" name="EnterUsername" class="form-control">
         </div>
       </div>
+
+
 
       <!-- password -->
       <div class="form-group">
@@ -32,25 +34,31 @@
 
       <!-- EMAIL -->
       <div class="form-group">
-        <label for="inputEnterConfirmPass" class="col-sm-3 control-label">Enter Email:</label>
+        <label for="inputEnterEmail" class="col-sm-3 control-label">Enter Email:</label>
         <div class="col-sm-8">
-          <input type="email" formControlName="email" name="EnterConfirmPass" class="form-control">
+          <input type="email" required="required"  formControlName="email" required name="inputEnterEmail" class="form-control">
         </div>
       </div>
 
+
       <!-- Confirm password -->
       <div class="form-group">
-        <label for="inputEnterConfirmPass" class="col-sm-3 control-label">Mobile Number :</label>
+        <label  class="col-sm-3 control-label">Mobile Number :</label>
         <div class="col-sm-8">
-          <input type="phone" formControlName="phone" name="EnterConfirmPass" class="form-control">
+          <input type="number" formControlName="mobile" name="enterMobile" class="form-control">
+          <!-- <div *ngIf="register.controle[password].value == register.controle[conPass].value">Confirm password  is not matiching</div> -->
         </div>
+
       </div>
 
       <div class="form-group">
         <div class="col-sm-8 col-sm-offset-3">
-          <button type="submit" class="btn btn-primary  btn-block">Register</button>
+          <button type="submit" class="btn btn-primary  btn-block" [disabled]="!register.valid">Register</button>
         </div>
       </div>
     </form>
   </div>
 </div>
+
+<!-- {{register.control['password'].value}} -->
+

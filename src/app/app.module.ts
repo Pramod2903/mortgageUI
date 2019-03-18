@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRouteModule } from './app-route/app-route.module';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MortgageService } from './mortgage.service';
 // import { AppRouteRoutingModule } from './app-route/app-route-routing.module';
 
 
@@ -34,7 +35,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     CommonModule,
   ],
-  providers: [],
+  providers: [MortgageService],
   exports:[AppRouteModule],
   bootstrap: [AppComponent]
 })

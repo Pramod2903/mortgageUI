@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControlName, FormBuilder ,Validators, FormGroup} from '@angular/forms';
+import { MortgageService } from '../mortgage.service';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +9,7 @@ import { FormControlName, FormBuilder ,Validators, FormGroup} from '@angular/for
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fb:FormBuilder) {
+  constructor(private fb:FormBuilder, private ser:MortgageService) {
     this.buildRegisterForm();
    }
 
@@ -19,11 +20,36 @@ export class RegisterComponent implements OnInit {
 
   buildRegisterForm(){
     this.register = this.fb.group({
-      userName:['',Validators['required']],
-      password:['',Validators['required']],
-      conPass:['',Validators['required']],
-      email:['',Validators['required']],
-      phone:['',Validators['required']],
+      name:['',Validators.required],
+      password:['',Validators.required],
+      conPass:['',Validators.required],
+      email:['',Validators.required],
+      mobile:['',Validators.required],
     })
+  }
+
+  userMeassage:any;
+
+  userRegister(obj){
+    this.ser.userRegistrationSer(obj).subscribe(data => {
+      this.userMeassage = data
+      if(data.email === obj.email){
+        alert(`sucessufuly registerd`);
+      }else{
+        alert(`Error in while register`);
+      }
+    })
+   }
+
+  onSubmit(){
+   console.log(this.register.value);
+    let obj ={
+      "userName" : this.register.controls['name'].value,
+      "password" :this.register.controls['password'].value,
+      "phone": this.register.controls['mobile'].value,
+      "email":this.register.controls['email'].value,
+      }
+
+      this.userRegister(obj);
   }
 }
